@@ -6,6 +6,7 @@ import static org.junit.Assert.fail;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.util.concurrent.Semaphore;
 
 import javax.annotation.Resource;
 
@@ -15,7 +16,7 @@ public class SimpleTestSocketListener implements SocketListener {
 	private static Logger LOG = Logger.getLogger(SimpleTestSocketListener.class);
 	
 	@Resource
-	private Object syncToken;
+	private Semaphore syncToken;
 
 	private Socket socket;
 
@@ -27,9 +28,7 @@ public class SimpleTestSocketListener implements SocketListener {
 
 	public void run() {
 		LOG.info("Running SimpleTestSocketListener");
-		synchronized(syncToken) {
-			syncToken.notify();
-		}
+		syncToken.release();
 		try {
 			socket.close();
 		} catch (IOException e) {

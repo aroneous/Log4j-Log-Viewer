@@ -5,5 +5,7 @@
 
 	<bean class="cc.wily.logviewer.connections.SimpleTestSocketListener" scope="prototype"/>
 
-	<bean id="syncToken" class="java.lang.Object"/>
+	<bean id="syncToken" class="java.util.concurrent.Semaphore">
+		<constructor-arg value="0"/>
+	</bean>
 </beans>
