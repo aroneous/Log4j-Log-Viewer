@@ -19,9 +19,9 @@ import org.springframework.stereotype.Component;
 public class ConnectionListener implements Runnable, ApplicationContextAware {
 	private static Logger LOG = Logger.getLogger(ConnectionListener.class);
 
-	ServerSocket listener;
+	private ServerSocket listener;
 	
-	TaskExecutor executor;
+	private TaskExecutor executor;
 
 	private ApplicationContext applicationContext;
 	
@@ -70,8 +70,10 @@ public class ConnectionListener implements Runnable, ApplicationContextAware {
 	}
 	
 	public void shutdown() throws IOException {
-		shutdown = true;
-		listener.close();
+		if (!shutdown) {
+			shutdown = true;
+			listener.close();
+		}
 	}
 	
 	/**
