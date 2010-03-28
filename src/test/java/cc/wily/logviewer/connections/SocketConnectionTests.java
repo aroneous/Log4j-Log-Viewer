@@ -21,7 +21,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration
-public class SocketConnectionTests extends BaseConnectionTests {
+public class SocketConnectionTests extends ConnectionTestsBase {
 	private static Logger LOG = Logger.getLogger(SocketConnectionTests.class);
 
 	@Resource
