@@ -1,6 +1,6 @@
 package cc.wily.logviewer.processing;
 
-import org.apache.log4j.spi.LoggingEvent;
+import cc.wily.logviewer.entry.LogEntry;
 
 public interface EventProcessor {
 	/**
@@ -9,5 +9,5 @@ public interface EventProcessor {
 	 * @param event
 	 *            The event to process.
 	 */
-	void processEvent(LoggingEvent event);
+	void processEvent(LogEntry event);
 }

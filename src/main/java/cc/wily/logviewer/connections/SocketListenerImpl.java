@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Required;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import cc.wily.logviewer.entry.LogEntry;
 import cc.wily.logviewer.processing.EventProcessor;
 import cc.wily.logviewer.reader.SocketLogReader;
 
@@ -31,7 +32,9 @@ public class SocketListenerImpl implements SocketListener {
 				LOG.debug("Received event for " + socket.getInetAddress() + ":"
 						+ socket.getPort());
 			}
-			eventProcessor.processEvent(event);
+			LogEntry entry = new LogEntry(event, socket.getInetAddress(),
+					socket.getPort());
+			eventProcessor.processEvent(entry);
 		}
 	}
 
@@ -45,10 +48,10 @@ public class SocketListenerImpl implements SocketListener {
 	 */
 	@Resource
 	@Required
-	public void setEventProcessor(EventProcessor eventProcessor) {
+	public void setPerHostEventProcessor(EventProcessor eventProcessor) {
 		this.eventProcessor = eventProcessor;
 	}
-	
+
 	public void setSocket(Socket socket) throws IOException {
 		this.socket = socket;
 		reader = new SocketLogReader(socket);
