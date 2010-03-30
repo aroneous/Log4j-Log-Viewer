@@ -1,0 +1,4 @@
+This is the start of a Log4j log viewer. When it's something, it will be deployable as a WAR file, will listen for Log4j events on a TCP port, and
+will provide a killer UI to browse, filter, and search those logs.
+
+Right now it's not much of anything. But thanks for having a look.
