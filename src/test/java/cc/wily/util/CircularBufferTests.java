@@ -154,4 +154,51 @@ public class CircularBufferTests {
 			// ...
 		}
 	}
+	
+	@Test
+	public void testOverwriteListIterationForwardBack() {
+		ListIterator<Integer> it = bufOvflw.listIterator(2);
+
+		assertTrue(it.hasNext());
+		assertEquals(5L, (long) it.next());
+
+		assertTrue(it.hasNext());
+		assertEquals(6L, (long) it.next());
+
+		assertTrue(it.hasNext());
+		assertEquals(7L, (long) it.next());
+
+		assertFalse(it.hasNext());
+
+		try {
+			it.next();
+			fail("Iterator didn't throw exception at end");
+		} catch (NoSuchElementException e) {
+			// ...
+		}
+		
+		assertTrue(it.hasPrevious());
+		assertEquals(7L, (long) it.previous());
+		
+		assertTrue(it.hasPrevious());
+		assertEquals(6L, (long) it.previous());
+
+		assertTrue(it.hasPrevious());
+		assertEquals(5L, (long) it.previous());
+
+		assertTrue(it.hasPrevious());
+		assertEquals(4L, (long) it.previous());
+
+		assertTrue(it.hasPrevious());
+		assertEquals(3L, (long) it.previous());
+
+		assertFalse(it.hasPrevious());
+
+		try {
+			it.previous();
+			fail("Iterator didn't throw exception at beginning");
+		} catch (NoSuchElementException e) {
+			// ...
+		}
+	}
 }
