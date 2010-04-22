@@ -22,4 +22,8 @@
 		<constructor-arg value="1000"/>
 		<constructor-arg value="true"/>
 	</bean>
+	
+	<bean id="recentEntryBuffer" class="cc.wily.util.CircularBuffer">
+		<constructor-arg value="1000"/>
+	</bean>
 </beans>

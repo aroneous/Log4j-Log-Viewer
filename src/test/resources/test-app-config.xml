@@ -8,8 +8,6 @@
 	
 	<context:annotation-config/>
 	
-	<bean class="cc.wily.logviewer.connections.ConnectionListenerManager"/>
-	
 	<bean id="executor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
 		<property name="corePoolSize" value="1"/>
 		<property name="queueCapacity" value="0"/>

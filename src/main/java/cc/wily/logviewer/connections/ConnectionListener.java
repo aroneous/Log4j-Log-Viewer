@@ -5,6 +5,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
@@ -20,12 +22,35 @@ public class ConnectionListener implements Runnable, ApplicationContextAware {
 	private static Logger LOG = Logger.getLogger(ConnectionListener.class);
 
 	private ServerSocket listener;
-	
+
 	private TaskExecutor executor;
 
 	private ApplicationContext applicationContext;
-	
+
 	private boolean shutdown = false;
+
+	private Thread connectionThread;
+
+	@PostConstruct
+	public void init() {
+		connectionThread = new Thread(this);
+		connectionThread.start();
+	}
+
+	@PreDestroy
+	public void tearDown() {
+		LOG.info("shutting down");
+		try {
+			shutdown();
+		} catch (IOException e1) {
+			LOG.error("Failed to close ConnectionListener", e1);
+		}
+		try {
+			connectionThread.join();
+		} catch (InterruptedException e) {
+			LOG.warn("Interrupted waiting for listener thread to die", e);
+		}
+	}
 
 	public void run() {
 		while (true) {
@@ -45,7 +70,7 @@ public class ConnectionListener implements Runnable, ApplicationContextAware {
 			}
 		}
 	}
-	
+
 	protected void handleNewConnection(Socket socket) {
 		try {
 			SocketListener reader = getSocketListener();
@@ -62,20 +87,20 @@ public class ConnectionListener implements Runnable, ApplicationContextAware {
 			}
 		}
 	}
-	
+
 	@Resource
 	@Required
 	public void setExecutor(TaskExecutor executor) {
 		this.executor = executor;
 	}
-	
+
 	public void shutdown() throws IOException {
 		if (!shutdown) {
 			shutdown = true;
 			listener.close();
 		}
 	}
-	
+
 	/**
 	 * Set the server socket to accept connections on. This socket should be
 	 * already bound to a port.
@@ -87,7 +112,7 @@ public class ConnectionListener implements Runnable, ApplicationContextAware {
 	public void setServerSocket(ServerSocket listener) {
 		this.listener = listener;
 	}
-	
+
 	protected SocketListener getSocketListener() {
 		return applicationContext.getBean(SocketListener.class);
 	}

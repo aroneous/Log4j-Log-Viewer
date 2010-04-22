@@ -21,6 +21,10 @@ public class CircularBuffer<E> extends AbstractList<E> {
 	 * {@link #add(Object)} method.
 	 * </p>
 	 * 
+	 * <p>
+	 * This class is multi-thread safe.
+	 * </p>
+	 * 
 	 * @param count
 	 *            The capacity of the buffer. The buffer does not support
 	 *            resizing.
@@ -35,7 +39,7 @@ public class CircularBuffer<E> extends AbstractList<E> {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public E get(int index) {
+	public synchronized E get(int index) {
 		if (index >= 0 && index < count) {
 			return (E) buffer[(head + index) % buffer.length];
 		} else {
@@ -44,12 +48,12 @@ public class CircularBuffer<E> extends AbstractList<E> {
 	}
 
 	@Override
-	public int size() {
+	public synchronized int size() {
 		return count;
 	}
 
 	@Override
-	public boolean add(E e) {
+	public synchronized boolean add(E e) {
 		int ix = (head + count) % buffer.length;
 		buffer[ix] = e;
 		if (count < buffer.length) {
@@ -61,7 +65,7 @@ public class CircularBuffer<E> extends AbstractList<E> {
 	}
 
 	@Override
-	public void clear() {
+	public synchronized void clear() {
 		for (int i = head; i < head + count; i++) {
 			buffer[i % buffer.length] = null;
 		}
@@ -69,7 +73,7 @@ public class CircularBuffer<E> extends AbstractList<E> {
 		count = 0;
 	}
 	
-	public List<E> snapshot() {
+	public synchronized List<E> snapshot() {
 		return new ArrayList<E>(this);
 	}
 
