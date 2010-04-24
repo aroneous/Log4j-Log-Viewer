@@ -1,5 +1,6 @@
-#Sat Apr 24 19:15:40 NZST 2010
+#Sun Apr 25 00:01:29 NZST 2010
 eclipse.preferences.version=1
 jarsExcludedFromWebInfLib=
+lastWarOutDir=/Users/aron/Documents/workspace-sts-2.3.1.RELEASE/LogViewer/src/main/webapp
 warSrcDir=src/main/webapp
-warSrcDirIsOutput=true
+warSrcDirIsOutput=false

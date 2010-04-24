@@ -6,6 +6,10 @@
 		<to>/app/view</to>
 	</rule>
 	<rule>
+		<from>/cc.wily.logviewer.presentation.*/**</from>
+		<to>/cc.wily.logviewer.presentation.$1/$2</to>
+	</rule>
+	<rule>
 		<from>/**</from>
 		<to>/app/$1</to>
 	</rule>
