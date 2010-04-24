@@ -7,9 +7,9 @@
 	</configSuffixes>
 	<enableImports><![CDATA[true]]></enableImports>
 	<configs>
-		<config>src/test/java/cc/wily/logviewer/connections/SocketConnectionTests-context.xml</config>
-		<config>src/test/java/cc/wily/logviewer/connections/SocketListenerTests-context.xml</config>
-		<config>src/test/java/cc/wily/logviewer/processing/LogAggregatorTests-context.xml</config>
+		<config>src/test/resources/cc/wily/logviewer/processing/LogAggregatorTests-context.xml</config>
+		<config>src/test/resources/cc/wily/logviewer/connections/SocketConnectionTests-context.xml</config>
+		<config>src/test/resources/cc/wily/logviewer/connections/SocketListenerTests-context.xml</config>
 	</configs>
 	<configSets>
 	</configSets>
