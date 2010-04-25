@@ -6,7 +6,7 @@
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <title>Logs</title>
 <script type="text/javascript" language="javascript"
-	src="cc.wily.logviewer.presentation.viewer/cc.wily.logviewer.presentation.viewer.nocache.js"></script>
+	src="gwt/viewer/viewer.nocache.js"></script>
 </head>
 <body>
 <h1>Log Messages</h1>
